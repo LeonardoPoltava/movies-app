@@ -1,11 +1,11 @@
 import {
   HttpClient,
-} from "@angular/common/http";
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { environment } from "../../environments/environment";
-import { MoviesType } from "../types/movies-type";
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import {movieOrSeriesType, MoviesType} from '../types/movies-type';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +19,14 @@ export class MoviesService {
       map(
         response => response.results
       )
-    )
+    );
   }
 
-  public requestMovie(type: string, movieId: string): Observable<MoviesType> {
+  public requestMovie(type: string, movieId: string): Observable<movieOrSeriesType> {
     return this.http.get<any>(`/api/${type}/${movieId}${environment.API_KEY}`).pipe(
       map(
         response => response
       )
-    )
+    );
   }
 }

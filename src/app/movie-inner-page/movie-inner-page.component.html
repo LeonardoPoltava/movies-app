@@ -1,6 +1,7 @@
-<div class="container" *ngIf="movie">
-  <img
-    [src]="'https://image.tmdb.org/t/p/w220_and_h330_face' + movie.backdrop_path"
-    alt=""
-  >
+<div class="container _inner" *ngIf="movie">
+    <app-movie-dashboard [movie]="movie"></app-movie-dashboard>
+    <div *ngIf="castCrew">
+        <app-movie-actors [castCrew]="castCrew"></app-movie-actors>
+        <app-movie-crew [castCrew]="castCrew"></app-movie-crew>
+    </div>
 </div>

@@ -1,0 +1,12 @@
+<div class="cast">
+    <span class="cast__title">Actors cast:</span>
+    <div class="cast__list">
+        <ng-container *ngFor="let actor of castCrew?.cast">
+            <div class="cast__person">
+                <img [src]="actor.profile_path | imageUrl" alt="" class="cast__photo">
+                <span class="cast__name"><b>Actor name:</b> {{actor.name}}</span>
+                <span class="cast__character"><b>Characther:</b> {{actor.character}}</span>
+            </div>
+        </ng-container>
+    </div>
+</div>

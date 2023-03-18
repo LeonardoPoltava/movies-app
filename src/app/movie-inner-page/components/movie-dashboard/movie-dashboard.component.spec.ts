@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MovieInnerPageComponent } from './movie-inner-page.component';
+import { MovieDashboardComponent } from './movie-dashboard.component';
 
-describe('MovieInnerPageComponent', () => {
-  let component: MovieInnerPageComponent;
-  let fixture: ComponentFixture<MovieInnerPageComponent>;
+describe('MovieDashboardComponent', () => {
+  let component: MovieDashboardComponent;
+  let fixture: ComponentFixture<MovieDashboardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MovieInnerPageComponent ]
+      declarations: [ MovieDashboardComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MovieInnerPageComponent);
+    fixture = TestBed.createComponent(MovieDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

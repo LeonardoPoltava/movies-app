@@ -5,7 +5,7 @@
       <ng-container *ngFor="let movie of trendingMovies | slice: 0: 12">
         <app-movie-card
           [movieType]="movie.media_type"
-          [imgSrc]="'https://image.tmdb.org/t/p/w220_and_h330_face' + movie.backdrop_path"
+          [imgSrc]="movie.backdrop_path | imageUrl"
           [movieName]="movie.name ? movie.name : movie.title || ''"
           [date]="movie.first_air_date ? movie.first_air_date : movie.release_date || ''"
           [movieId]="movie.id"
