@@ -39,7 +39,7 @@ export class MovieInnerPageComponent implements OnInit, OnDestroy {
                 switchMap(event =>
                     this.route.params.pipe(
                         tap((params: Params) => {
-                            this.paramsId = params.id;
+                            this.paramsId = params['id'];
                         }),
                         take(1)
                     )
