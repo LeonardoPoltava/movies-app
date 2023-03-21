@@ -14,7 +14,7 @@ export class CastCrewService {
     }
 
     public requestCast(type: string, movieId: string): Observable<castCrewType> {
-        return this.http.get<any>(`/api/${type}/${movieId}/credits${environment.API_KEY}`).pipe(
+        return this.http.get<any>(`/api/${type}/${movieId}/credits`).pipe(
             map(
                 response => response
             )

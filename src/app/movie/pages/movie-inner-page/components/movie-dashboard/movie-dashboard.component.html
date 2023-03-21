@@ -6,7 +6,9 @@
         <span class="movie-dashboard__date"><b>Release date:</b> {{movie.first_air_date ? movie.first_air_date : movie.release_date}}</span>
         <div class="movie-dashboard__genre-list">
             <b>Genre:</b>
-            <span *ngFor="let genre of movie.genres" class="movie-dashboard__genre"> {{genre.name}}</span>
+            <span *ngFor="let genre of movie.genres; last as last; trackBy: 'id' | trackBy" class="movie-dashboard__genre">
+              {{genre.name}}{{last ? '' : ','}}
+            </span>
         </div>
     </div>
 </div>

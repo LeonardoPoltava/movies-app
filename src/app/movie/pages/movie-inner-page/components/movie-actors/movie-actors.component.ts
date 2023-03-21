@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {castCrewType} from '../../../types/cast-crew-type';
+import {castCrewType} from "../../../../../types/cast-crew-type";
 
 @Component({
     selector: 'app-movie-actors',

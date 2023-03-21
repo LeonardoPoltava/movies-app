@@ -1,7 +1,7 @@
 <div class="cast">
     <span class="cast__title">Crew cast:</span>
     <div class="cast__list">
-        <ng-container *ngFor="let crew of castCrew?.crew">
+        <ng-container *ngFor="let crew of castCrew?.crew; trackBy: 'id' | trackBy">
             <div class="cast__person">
                 <img [src]="crew.profile_path ? (crew.profile_path | imageUrl) : '/assets/user-icon.svg'"
                      [class._no-photo]="!crew.profile_path"

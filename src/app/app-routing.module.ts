@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {EntrancePageComponent} from './entrance-page/entrance-page.component';
-import {MovieInnerPageComponent} from './movie-inner-page/movie-inner-page.component';
+import {EntrancePageComponent} from './movie/pages/entrance-page/entrance-page.component';
+import {MovieInnerPageComponent} from './movie/pages/movie-inner-page/movie-inner-page.component';
 
 
 const routes: Routes = [

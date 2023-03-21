@@ -1,6 +1,6 @@
-<div class="container _inner" *ngIf="movie">
+<div class="container _inner" *ngIf="movie$ | async as movie">
     <app-movie-dashboard [movie]="movie"></app-movie-dashboard>
-    <div *ngIf="castCrew">
+    <div *ngIf="castCrew$ | async as castCrew">
         <app-movie-actors [castCrew]="castCrew"></app-movie-actors>
         <app-movie-crew [castCrew]="castCrew"></app-movie-crew>
     </div>

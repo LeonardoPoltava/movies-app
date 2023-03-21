@@ -15,7 +15,7 @@ export class MoviesService {
   constructor(private readonly http: HttpClient) { }
 
   public requestTrendingMovies(time: string = 'week'): Observable<MoviesType[]> {
-    return this.http.get<any>(`/api/trending/all/${time}${environment.API_KEY}`).pipe(
+    return this.http.get<any>(`/api/trending/all/${time}`).pipe(
       map(
         response => response.results
       )
@@ -23,7 +23,7 @@ export class MoviesService {
   }
 
   public requestMovie(type: string, movieId: string): Observable<movieOrSeriesType> {
-    return this.http.get<any>(`/api/${type}/${movieId}${environment.API_KEY}`).pipe(
+    return this.http.get<movieOrSeriesType>(`/api/${type}/${movieId}`).pipe(
       map(
         response => response
       )
