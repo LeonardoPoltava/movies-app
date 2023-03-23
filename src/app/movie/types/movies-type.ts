@@ -1,4 +1,4 @@
-import {castCrewType} from "../people/cast-crew-type";
+import {castCrewType} from "../../people/types/cast-crew-type";
 
 export type MoviesType = {
   backdrop_path: string,

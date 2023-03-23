@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {movieOrSeriesType} from "../../../../../types/movies/movies-type";
+import {movieOrSeriesType} from "../../../../types/movies-type";
 
 @Component({
   selector: 'app-movie-dashboard',

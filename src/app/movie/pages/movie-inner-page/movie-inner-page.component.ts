@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {combineLatest, Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {MoviesService} from "../../../services/movies.service";
-import {movieOrSeriesType} from "../../../types/movies/movies-type";
+import { movieOrSeriesType } from '../../types/movies-type';
+import {MoviesService} from "../../services/movies.service";
 
 @Component({
   selector: 'app-movie-inner-page',

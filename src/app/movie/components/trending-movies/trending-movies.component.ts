@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {Observable} from "rxjs";
-import {MoviesService} from "../../../services/movies.service";
-import {MoviesType} from "../../../types/movies/movies-type";
+import {MoviesService} from "../../services/movies.service";
+import {MoviesType} from "../../types/movies-type";
 
 @Component({
   selector: "app-trending-movies",
