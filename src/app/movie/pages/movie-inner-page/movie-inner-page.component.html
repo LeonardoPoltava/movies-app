@@ -1,0 +1,5 @@
+<div class="container _inner" *ngIf="movie$ | async as movie">
+    <app-movie-dashboard [movie]="movie"></app-movie-dashboard>
+    <app-movie-actors [castActors]="movie.credits.cast"></app-movie-actors>
+    <app-movie-crew [castCrew]="movie.credits.crew"></app-movie-crew>
+</div>

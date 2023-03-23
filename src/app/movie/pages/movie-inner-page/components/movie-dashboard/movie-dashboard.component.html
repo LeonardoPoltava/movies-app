@@ -1,0 +1,14 @@
+<div class="movie-dashboard">
+    <img class="movie-dashboard__img" [src]="movie.backdrop_path | imageUrl" alt="">
+    <div class="movie-dashboard__side">
+        <span class="movie-dashboard__title"><b>Title:</b> {{movie.name ? movie.name : movie.title}}</span>
+        <span class="movie-dashboard__description"><b>Description:</b> {{movie.overview}}</span>
+        <span class="movie-dashboard__date"><b>Release date:</b> {{movie.first_air_date ? movie.first_air_date : movie.release_date}}</span>
+        <div class="movie-dashboard__genre-list">
+            <b>Genre:</b>
+            <span *ngFor="let genre of movie.genres; last as last; trackBy: 'id' | trackBy" class="movie-dashboard__genre">
+              {{genre.name}}{{last ? '' : ','}}
+            </span>
+        </div>
+    </div>
+</div>

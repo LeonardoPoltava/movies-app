@@ -1,30 +1,38 @@
-import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { EntrancePageComponent } from './entrance-page/entrance-page.component';
-import { HeaderComponent } from './header/header.component';
-import { TrendingMoviesComponent } from './components/trending-movies/trending-movies.component';
-import { MovieCardComponent } from './components/movie-card/movie-card.component';
-import { MovieInnerPageComponent } from './movie-inner-page/movie-inner-page.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './layout/header/header.component';
+import {AuthInterceptor} from "./http/auth.interceptor";
+import {EntrancePageModule} from "./movie/pages/entrance-page/entrance-page.module";
+import {MovieInnerPageModule} from "./movie/pages/movie-inner-page/movie-inner-page.module";
+import {UrlInterceptor} from "./http/url.interceptor";
 
 @NgModule({
   declarations: [
     AppComponent,
-    EntrancePageComponent,
     HeaderComponent,
-    TrendingMoviesComponent,
-    MovieCardComponent,
-    MovieInnerPageComponent
   ],
   imports: [
+    EntrancePageModule,
+    MovieInnerPageModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UrlInterceptor,
+      multi: true,
+    },],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
