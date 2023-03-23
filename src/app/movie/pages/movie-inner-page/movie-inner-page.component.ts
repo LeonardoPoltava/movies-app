@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {combineLatest, Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
-import { movieOrSeriesType } from '../../types/movies-type';
+import {combineLatest, Observable, switchMap} from 'rxjs';
 import {MoviesService} from "../../services/movies.service";
+import {movieOrSeriesType} from "../../types/movies-type";
 
 @Component({
   selector: 'app-movie-inner-page',
@@ -13,8 +12,6 @@ import {MoviesService} from "../../services/movies.service";
 export class MovieInnerPageComponent implements OnInit {
 
   public movie$!: Observable<movieOrSeriesType>;
-  public type!: string;
-  private paramsId!: string;
 
   constructor(private moviesService: MoviesService,
               private readonly router: Router,
@@ -23,13 +20,10 @@ export class MovieInnerPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     combineLatest([this.route.params, this.route.url])
       .pipe(
-        tap(([params, url]: [Params, Params]) => ([this.paramsId = params["id"], this.type = url[0].path])),
+        switchMap(([params, url]: [Params, Params]) => this.movie$ = this.moviesService.requestMovie(url[0].path, params["id"]))
       ).subscribe();
-
-    this.movie$ = this.moviesService.requestMovie(this.type, this.paramsId);
   }
 
 
