@@ -1,0 +1,35 @@
+@import "src/styles/variables";
+
+.cast-person {
+  display: grid;
+  grid-gap: 10px;
+  border: 1px solid #fff;
+  background: #fff;
+  color: #000;
+  margin-right: 15px;
+  padding-bottom: 15px;
+  grid-auto-rows: min-content;
+  height: 100%;
+  max-width: 222px;
+  &_search {
+    width: 100%;
+  }
+  &__name,
+  &__character,
+  &__job {
+    padding: $padding-content;
+  }
+  &__photo {
+    display: block;
+    width: 220px;
+    height: 330px;
+  }
+}
+._no-photo {
+  padding: 60px;
+  background: gray;
+}
+._search {
+  width: 100%;
+  height: auto;
+}

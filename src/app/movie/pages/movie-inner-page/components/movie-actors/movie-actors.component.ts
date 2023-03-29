@@ -7,5 +7,5 @@ import {castType} from "../../../../../people/types/cast-type";
 })
 export class MovieActorsComponent {
 
-  @Input() public castActors!: castType;
+  @Input() public castActors!: castType[];
 }

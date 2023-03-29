@@ -5,7 +5,7 @@ import {MovieInnerPageComponent} from './movie/pages/movie-inner-page/movie-inne
 
 
 const routes: Routes = [
-    {path: '', component: EntrancePageComponent},
+    {path: '', component: EntrancePageComponent, pathMatch: 'full'},
     {path: 'movie/:id', component: MovieInnerPageComponent},
     {path: 'tv/:id', component: MovieInnerPageComponent},
 ];

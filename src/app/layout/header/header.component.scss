@@ -1,5 +1,5 @@
 .header {
-  background: #000;
+  background: #fff;
   &__nav {
     display: flex;
     align-items: center;
@@ -9,9 +9,10 @@
   &__link {
     margin-right: 10px;
     font-size: 16px;
-    color: #fff;
+    color: #032541FF;
+    text-decoration: none;
     &.active {
-      color: yellow;
+      text-decoration: underline;
     }
   }
 }

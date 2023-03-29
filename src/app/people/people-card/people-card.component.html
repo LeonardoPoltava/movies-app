@@ -1,0 +1,27 @@
+<div class="cast-person" [class.cast-person_search]="search">
+  <img [src]="actor ?
+    actor.profile_path ? (actor.profile_path | imageUrl) : './assets/user-icon.svg' :
+    crew.profile_path ? (crew.profile_path | imageUrl) : './assets/user-icon.svg'
+"
+       [class._no-photo]="actor ? !actor.profile_path : !crew.profile_path"
+       [class._search]="search"
+       class="cast-person__photo"
+       alt="{{actor ? actor.name : crew.name}} photo"
+  >
+ <ng-container *ngIf="actor">
+   <span class="cast-person__name"><b>{{search ? "Name:" : "Actor name:"}}</b> {{actor.name}}</span>
+   <span class="cast-person__character">
+     <ng-container *ngIf="search; else generalCast">
+       <b>Department:</b> {{actor.known_for_department}}
+     </ng-container>
+     <ng-template #generalCast>
+       <b>Character:</b> {{actor.character}}
+     </ng-template>
+   </span>
+ </ng-container>
+  <ng-container *ngIf="crew">
+    <span class="cast-person__name"><b>Crew name:</b> {{crew.name}}</span>
+    <span class="cast-person__job"><b>Department:</b> {{search ? crew.known_for_department : crew.department}}</span>
+    <span class="cast-person__job"><b>{{crew.job}}</b></span>
+  </ng-container>
+</div>

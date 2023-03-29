@@ -1,0 +1,68 @@
+.search {
+  padding: 50px 0;
+  background: #000000;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  &__form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px;
+  }
+  &__input {
+    padding: 0 165px 0 15px;
+    color: #000;
+    border-radius: 25px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 0 10px 2px #fff;
+  }
+  &__btn {
+    border-radius: 25px;
+    border: none;
+    margin-left: -100px;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 0 10px 2px #000;
+  }
+  &__results {
+    margin-top: 15px;
+  }
+  &__results-content {
+    background: #032541FF;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 15px;
+    position: relative;
+    z-index: 2;
+  }
+  &__shadow {
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+  }
+  &__close {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    z-index: 3;
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    background: none;
+    cursor: pointer;
+    border: none;
+  }
+  ::ng-deep {
+    .movie__name {
+      font-size: 18px;
+    }
+    .movie__date {
+      font-size: 14px;
+    }
+  }
+}
