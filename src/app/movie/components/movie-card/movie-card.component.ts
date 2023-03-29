@@ -14,5 +14,4 @@ export class MovieCardComponent {
   @Input("date") public date!: string;
   @Input("movieType") public movieType!: string;
   @Input("movieId") public movieId!: number;
-  ImgSrc: any;
 }
