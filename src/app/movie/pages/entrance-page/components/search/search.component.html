@@ -1,36 +1,33 @@
 <div class="search">
   <div class="container">
-    <form class="search__form">
+    <form class="search__form" [formGroup]="searchForm">
       <input class="search__input"
-             #search="ngModel"
              id="search"
              name="search"
-             ngModel
+             autocomplete="off"
+             formControlName="searchInput"
              type="text"
              placeholder="Search for a movie, tv show, person......"
       >
     </form>
-    <ng-container *ngIf="search.value && search.value.length > 3">
-      <div class="search__results">
-        <div class="search__results-content">
-          <ng-container *ngIf="search$ | async as searchResults; else preloader">
+    <ng-container *ngIf="search$ | async as searchResults">
+      <div class="search__results" *ngIf="searchForm.controls['searchInput'].value.length > 2">
+        <div class="search__results-content" >
+          <ng-container *ngIf="searchForm.controls['searchInput'].value.length > 2 && searchResults.length > 0; else noResults">
             <ng-container *ngFor="let searchItem of searchResults; trackBy: 'id' | trackBy">
-              <ng-container *ngIf="searchItem.media_type === 'person'; else movieOrTv">
-                <app-people-card [actor]="searchItem" [search]="true"></app-people-card>
-              </ng-container>
-              <ng-template #movieOrTv>
-                <app-movie-card
-                  [movieType]="searchItem.title ? 'movie' : 'tv'"
-                  [imgSrc]="searchItem.poster_path | imageUrl"
-                  [movieName]="searchItem.name ? searchItem.name : searchItem.title || ''"
-                  [date]="searchItem.first_air_date ? searchItem.first_air_date : searchItem.release_date || ''"
-                  [movieId]="searchItem.id"
-                ></app-movie-card>
-              </ng-template>
+              <app-people-card *ngIf="searchItem.media_type === 'person'" [actor]="searchItem" [search]="true"></app-people-card>
+              <app-movie-card
+                *ngIf="searchItem.media_type !== 'person'"
+                [movieType]="searchItem.title ? 'movie' : 'tv'"
+                [imgSrc]="searchItem.poster_path | imageUrl"
+                [movieName]="searchItem.name ? searchItem.name : searchItem.title || ''"
+                [date]="searchItem.first_air_date ? searchItem.first_air_date : searchItem.release_date || ''"
+                [movieId]="searchItem.id"
+              ></app-movie-card>
             </ng-container>
           </ng-container>
-          <ng-template #preloader>
-            <div class="lds-dual-ring"></div>
+          <ng-template #noResults>
+            <span>No results</span>
           </ng-template>
         </div>
       </div>

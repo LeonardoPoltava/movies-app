@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {SearchComponent} from "./search.component";
 import {PipesModule} from "../../../../../pipes/pipes.module";
 import {MovieCardModule} from "../../../../components/movie-card/movie-card.module";
-import {FormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {PeopleCardModule} from "../../../../../people/people-card/people-card.module";
 
 
@@ -13,7 +13,7 @@ import {PeopleCardModule} from "../../../../../people/people-card/people-card.mo
     CommonModule,
     PipesModule,
     MovieCardModule,
-    FormsModule,
+    ReactiveFormsModule,
     PeopleCardModule
   ],
   exports: [SearchComponent],

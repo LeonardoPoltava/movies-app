@@ -1,8 +1,6 @@
 <div class="cast">
   <span class="cast__title">Actors cast:</span>
   <div class="cast__list">
-    <ng-container *ngFor="let actor of castActors; trackBy: 'id' | trackBy">
-      <app-people-card [actor]="actor"></app-people-card>
-    </ng-container>
+    <app-people-card  *ngFor="let actor of castActors; trackBy: 'id' | trackBy" [actor]="actor"></app-people-card>
   </div>
 </div>
