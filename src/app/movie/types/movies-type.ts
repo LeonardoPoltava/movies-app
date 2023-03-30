@@ -10,18 +10,22 @@ export type MoviesType = {
   original_name: string,
   overview: string,
   media_type: string,
+  popularity: number,
+  poster_path: string,
+  profile_path: string
 };
 
 export type movieOrSeriesType = {
   backdrop_path: string,
   first_air_date?: string,
   release_date?: string,
-  genres: [{ id: number, name: string }],
+  genres: [{ id: number, name: string }], //
   id: number,
   name?: string,
   title?: string,
   original_name: string,
   overview: string,
   poster_path: string,
-  credits: castCrewType
+  media_type: string,
+  credits: castCrewType,
 };

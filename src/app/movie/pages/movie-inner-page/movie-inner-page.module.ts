@@ -5,11 +5,13 @@ import {MovieDashboardComponent} from "./components/movie-dashboard/movie-dashbo
 import {MovieActorsComponent} from "./components/movie-actors/movie-actors.component";
 import {MovieCrewComponent} from "./components/movie-crew/movie-crew.component";
 import {PipesModule} from "../../../pipes/pipes.module";
+import {PeopleCardModule} from "../../../people/people-card/people-card.module";
 @NgModule({
   declarations: [MovieInnerPageComponent, MovieDashboardComponent, MovieActorsComponent, MovieCrewComponent],
-  imports: [
-    CommonModule,
-    PipesModule
-  ],
+    imports: [
+        CommonModule,
+        PipesModule,
+        PeopleCardModule
+    ],
 })
 export class MovieInnerPageModule { }

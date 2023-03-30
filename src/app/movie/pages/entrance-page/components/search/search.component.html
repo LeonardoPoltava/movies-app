@@ -1,0 +1,36 @@
+<div class="search">
+  <div class="container">
+    <form class="search__form" [formGroup]="searchForm">
+      <input class="search__input"
+             id="search"
+             name="search"
+             autocomplete="off"
+             formControlName="searchInput"
+             type="text"
+             placeholder="Search for a movie, tv show, person......"
+      >
+    </form>
+    <ng-container *ngIf="search$ | async as searchResults">
+      <div class="search__results" *ngIf="searchForm.controls['searchInput'].value.length > 2">
+        <div class="search__results-content" >
+          <ng-container *ngIf="searchResults.length > 0; else noResults">
+            <ng-container *ngFor="let searchItem of searchResults; trackBy: 'id' | trackBy">
+              <app-people-card *ngIf="searchItem.media_type === 'person'" [actor]="searchItem" [search]="true"></app-people-card>
+              <app-movie-card
+                *ngIf="searchItem.media_type !== 'person'"
+                [movieType]="searchItem.title ? 'movie' : 'tv'"
+                [imgSrc]="searchItem.poster_path | imageUrl"
+                [movieName]="searchItem.name ? searchItem.name : searchItem.title || ''"
+                [date]="searchItem.first_air_date ? searchItem.first_air_date : searchItem.release_date || ''"
+                [movieId]="searchItem.id"
+              ></app-movie-card>
+            </ng-container>
+          </ng-container>
+          <ng-template #noResults>
+            <span>No results</span>
+          </ng-template>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

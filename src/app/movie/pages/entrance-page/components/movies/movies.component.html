@@ -1,0 +1,3 @@
+<app-movies-section [elements]="trendingMovies$ | async" [moviesTitle]="'Trendings'"></app-movies-section>
+<app-movies-section [elements]="popular$ | async" [moviesTitle]="'Popular'"></app-movies-section>
+<app-movies-section [elements]="upcomingMovies$ | async" [moviesTitle]="'Upcoming'"></app-movies-section>

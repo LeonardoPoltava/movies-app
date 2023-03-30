@@ -1,4 +1,7 @@
-.trending {
+.movies-section {
+  h1 {
+    text-transform: capitalize;
+  }
   &__list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

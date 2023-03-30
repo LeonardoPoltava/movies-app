@@ -7,5 +7,5 @@ import {crewType} from "../../../../../people/types/crew-type";
   styleUrls: ['./movie-crew.component.scss']
 })
 export class MovieCrewComponent {
-  @Input() public castCrew!: crewType;
+  @Input() public castCrew!: crewType[];
 }

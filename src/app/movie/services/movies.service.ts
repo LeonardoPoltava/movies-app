@@ -27,4 +27,12 @@ export class MoviesService {
       )
     );
   }
+
+  public requestMovieOrSeries(type: string, category: string): Observable<MoviesType[]> {
+    return this.http.get<any>(`/${type}/${category}`).pipe(
+      map(
+        response => response.results
+      )
+    );
+  }
 }

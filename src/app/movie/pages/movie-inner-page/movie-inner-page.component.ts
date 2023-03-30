@@ -20,10 +20,10 @@ export class MovieInnerPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    combineLatest([this.route.params, this.route.url])
+    this.movie$ = combineLatest([this.route.params, this.route.url])
       .pipe(
-        switchMap(([params, url]: [Params, Params]) => this.movie$ = this.moviesService.requestMovie(url[0].path, params["id"]))
-      ).subscribe();
+        switchMap(([params, url]: [Params, Params]) => this.moviesService.requestMovie(url[0].path, params["id"]))
+      );
   }
 
 
