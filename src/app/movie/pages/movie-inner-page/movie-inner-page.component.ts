@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 import {combineLatest, Observable, switchMap} from 'rxjs';
 import {MoviesService} from "../../services/movies.service";
 import {movieOrSeriesType} from "../../types/movies-type";
@@ -14,7 +14,6 @@ export class MovieInnerPageComponent implements OnInit {
   public movie$!: Observable<movieOrSeriesType>;
 
   constructor(private moviesService: MoviesService,
-              private readonly router: Router,
               private readonly route: ActivatedRoute
   ) {
   }

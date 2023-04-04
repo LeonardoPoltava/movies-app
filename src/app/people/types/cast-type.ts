@@ -1,4 +1,4 @@
-export type castType = {
+export interface castType {
   adult: boolean,
   gender: number,
   id: number,
