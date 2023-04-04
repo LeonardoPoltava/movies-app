@@ -1,3 +1,5 @@
+@import "src/styles/mixins";
+
 .search {
   padding: 50px 0;
   background: #000000;
@@ -9,12 +11,15 @@
     grid-template-rows: 50px;
   }
   &__input {
-    padding: 0 165px 0 15px;
+    padding: 0 15px;
     color: #000;
     border-radius: 25px;
     border: none;
-    font-size: 20px;
+    font-size: 16px;
     box-shadow: 0 0 10px 2px #fff;
+    @include bp768 {
+      font-size: 20px;
+    }
   }
   &__btn {
     border-radius: 25px;
@@ -29,12 +34,17 @@
   }
   &__results-content {
     background: #032541FF;
-    padding: 30px;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-gap: 10px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 15px;
     position: relative;
     z-index: 2;
+    @include bp540 {
+      padding: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-gap: 15px;
+    }
   }
   &__shadow {
     background: rgba(0,0,0,0.5);
