@@ -1,0 +1,64 @@
+// mixins for breakpoints
+$bp2500: 2500px;
+$bp1920: 1920px;
+$bp1680: 1680px;
+$bp1440: 1440px;
+$bp1280: 1280px;
+$bp1024: 1024px;
+$bp768: 768px;
+$bp540: 540px;
+$bp375: 375px;
+
+@mixin bp2500 {
+  @media screen and (min-width: #{$bp2500}) {
+    @content;
+  }
+}
+
+@mixin bp1920 {
+  @media screen and (min-width: #{$bp1920}) {
+    @content;
+  }
+}
+
+@mixin bp1680 {
+  @media screen and (min-width: #{$bp1680}) {
+    @content;
+  }
+}
+
+@mixin bp1440 {
+  @media screen and (min-width: #{$bp1440}) {
+    @content;
+  }
+}
+
+@mixin bp1280 {
+  @media screen and (min-width: #{$bp1280}) {
+    @content;
+  }
+}
+
+@mixin bp1024 {
+  @media screen and (min-width: #{$bp1024}) {
+    @content;
+  }
+}
+
+@mixin bp768 {
+  @media screen and (min-width: #{$bp768}) {
+    @content;
+  }
+}
+
+@mixin bp540 {
+  @media screen and (min-width: #{$bp540}) {
+    @content;
+  }
+}
+
+@mixin bp375 {
+  @media screen and (min-width: #{$bp375}) {
+    @content;
+  }
+}

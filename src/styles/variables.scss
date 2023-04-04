@@ -1,1 +1,7 @@
+@import "src/styles/mixins";
+
 $padding-content: 0 15px;
+
+@include bp768 {
+  $padding-content: 0 10px;
+}
