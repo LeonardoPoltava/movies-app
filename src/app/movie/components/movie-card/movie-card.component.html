@@ -1,9 +1,11 @@
-<a class="movie" routerLink="{{movieType}}/{{movieId}}">
+<a class="movie" routerLink="/{{movieType}}/{{movieId}}">
   <img
-    [src]="imgSrc"
+    [src]="imgSrc ? imgSrc  : './assets/film-default.jpg'"
     alt=""
     class="movie__img"
   >
-  <span class="movie__name">{{name}}</span>
-  <span class="movie__date">{{date}}</span>
+  <span class="movie__text movie__name">{{name}}</span>
+  <span class="movie__text movie__date">{{date}}</span>
+  <span class="movie__text movie__job" *ngIf="movieJob"><b>Job:</b> {{movieJob}}</span>
+  <span class="movie__text movie__job" *ngIf="movieCharacter"><b>Character:</b> {{movieCharacter}}</span>
 </a>

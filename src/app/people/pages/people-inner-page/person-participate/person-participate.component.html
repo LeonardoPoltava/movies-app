@@ -1,0 +1,17 @@
+<div class="person-participate">
+  <span class="person-participate__title">{{title}}</span>
+  <div class="person-participate__films" *ngIf="personParticipate">
+    <app-movie-card
+      *ngFor="let movie of personParticipate;trackBy: 'id' | trackBy"
+      [movieType]="movie.title ? 'movie' : 'tv'"
+      [imgSrc]="
+          movie.poster_path ? (movie.poster_path | imageUrl) :
+          movie.backdrop_path ? (movie.backdrop_path | imageUrl) : null"
+      [date]="movie.first_air_date ? movie.first_air_date : movie.release_date || ''"
+      [movieId]="movie.id"
+      [movieName]="movie.name ? movie.name : movie.title || ''"
+      [movieCharacter]="movie.character"
+      [movieJob]="movie.job"
+    ></app-movie-card>
+  </div>
+</div>

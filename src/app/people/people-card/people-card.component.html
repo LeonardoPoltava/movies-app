@@ -1,4 +1,4 @@
-<div class="cast-person" [class.cast-person_search]="search">
+<a routerLink="/people/{{actor ? actor.id : crew.id}}" class="cast-person" [class.cast-person_search]="search">
   <img [src]="actor ?
     actor.profile_path ? (actor.profile_path | imageUrl) : './assets/user-icon.svg' :
     crew.profile_path ? (crew.profile_path | imageUrl) : './assets/user-icon.svg'
@@ -24,4 +24,4 @@
     <span class="cast-person__job"><b>Department:</b> {{search ? crew.known_for_department : crew.department}}</span>
     <span class="cast-person__job"><b>{{crew.job}}</b></span>
   </ng-container>
-</div>
+</a>
