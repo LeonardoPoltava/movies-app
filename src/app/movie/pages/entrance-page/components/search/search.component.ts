@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../../../../services/search.service";
-import {BehaviorSubject, debounceTime, filter, Observable, switchMap} from "rxjs";
+import {debounceTime, Observable, switchMap} from "rxjs";
 import {FormControl, FormGroup} from "@angular/forms";
-import {map, tap} from "rxjs/operators";
 import {searchType} from "../../../../../types/search-type";
 
 @Component({

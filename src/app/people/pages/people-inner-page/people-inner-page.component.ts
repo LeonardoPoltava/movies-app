@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PeopleService} from "../../services/people.service";
-import {combineLatest, Observable, switchMap} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 import {ActivatedRoute, Params} from "@angular/router";
 import {personType} from "../../types/cast-crew-type";
 
@@ -19,8 +19,8 @@ export class PeopleInnerPageComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.person$ = combineLatest([this.route.params]).pipe(
-      switchMap((params: Params) => this.peopleService.requestPerson(params[0]['id']))
+    this.person$ = this.route.params.pipe(
+      switchMap((params: Params) => this.peopleService.requestPerson(params['id']))
     );
   }
 }

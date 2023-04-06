@@ -15,7 +15,10 @@
         <div class="search__results-content" >
           <ng-container *ngIf="searchResults.length > 0; else noResults">
             <ng-container *ngFor="let searchItem of searchResults; trackBy: 'id' | trackBy">
-              <app-people-card *ngIf="searchItem.media_type === 'person'" [actor]="searchItem" [search]="true"></app-people-card>
+              <app-people-card class="test" *ngIf="searchItem.media_type === 'person'" [person]="searchItem">
+                <span class="cast-person__name"><b>Name</b> {{searchItem.name}}</span>
+                <span class="cast-person__character"><b>Department:</b> {{searchItem.known_for_department}}</span>
+              </app-people-card>
               <app-movie-card
                 *ngIf="searchItem.media_type !== 'person'"
                 [movieType]="searchItem.title ? 'movie' : 'tv'"

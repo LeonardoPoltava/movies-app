@@ -10,14 +10,17 @@
     padding: 20px;
     grid-gap: 20px;
     margin-bottom: 20px;
-    grid-template-areas: 'photo name' 'photo birthday' 'photo place' 'photo department' 'photo biography';
-    grid-template-columns: max-content;
+    grid-template-columns: 220px 1fr;
+  }
+  &__content {
+    display: grid;
+    grid-gap: 15px;
+    grid-auto-rows: max-content;
   }
   &__photo {
     margin: 0 auto;
     @include bp540 {
       margin: 0;
-      grid-area: photo;
     }
     &._no-photo {
       background: gray;
@@ -32,27 +35,6 @@
       font-weight: bold;
       @include bp540 {
         font-size: 40px;
-        grid-area: name;
-      }
-    }
-    &--birthday {
-      @include bp540 {
-        grid-area: birthday;
-      }
-    }
-    &--place {
-      @include bp540 {
-        grid-area: place;
-      }
-    }
-    &--department {
-      @include bp540 {
-        grid-area: department;
-      }
-    }
-    &--biography {
-      @include bp540 {
-        grid-area: biography;
       }
     }
   }
