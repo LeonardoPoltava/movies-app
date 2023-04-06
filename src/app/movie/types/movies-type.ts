@@ -22,3 +22,8 @@ export interface movieOrSeriesType extends moviesGeneral {
   genres: [{ id: number, name: string }],
   credits: castCrewType,
 }
+
+export interface Genres {
+  id: number,
+  name: string
+}
