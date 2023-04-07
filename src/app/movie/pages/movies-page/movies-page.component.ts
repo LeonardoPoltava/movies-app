@@ -70,7 +70,6 @@ export class MoviesPageComponent implements OnInit {
         this.isLoading = false;
       }
     })
-    console.log(this.filteredGroup.genres);
     this.moviesFilteredSubject.next({genres: this.filteredGroup.genres, page: this.filteredGroup.page});
   }
 
