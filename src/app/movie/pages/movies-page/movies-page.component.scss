@@ -38,11 +38,16 @@
   margin-bottom: 15px;
   margin-top: 15px;
   @include bp768 {
+    min-height: 100vh;
     margin-bottom: 0;
     margin-top: 0;
     padding-right: 15px;
     margin-left: -9999px;
     padding-left: 9999px;
+  }
+  @include bp1680 {
+    padding: 15px;
+    margin-left: 0;
   }
   &__title {
     display: block;
@@ -108,4 +113,7 @@
     width: 100%;
     margin-bottom: 5px;
   }
+}
+.lds-dual-ring {
+  min-height: calc(100vh - 230px);
 }
