@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {movieOrSeriesType} from "../../../../types/movies-type";
+import {MovieOrSeriesType} from "../../../../types/movies-type";
 
 @Component({
   selector: 'app-movie-dashboard',
@@ -7,5 +7,5 @@ import {movieOrSeriesType} from "../../../../types/movies-type";
   styleUrls: ['./movie-dashboard.component.scss']
 })
 export class MovieDashboardComponent {
-  @Input() public movie!: movieOrSeriesType;
+  @Input() public movie!: MovieOrSeriesType;
 }

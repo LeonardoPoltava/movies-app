@@ -1,6 +1,6 @@
-import {castCrewType} from "../../people/types/cast-crew-type";
+import {CastCrewType} from "../../people/types/cast-crew-type";
 
-interface moviesGeneral {
+interface MoviesGeneral {
   backdrop_path: string,
   first_air_date?: string,
   release_date?: string,
@@ -13,12 +13,17 @@ interface moviesGeneral {
   media_type: string,
 }
 
-export interface MoviesType extends moviesGeneral {
+export interface MoviesType extends MoviesGeneral {
   popularity: number,
   profile_path: string
 }
 
-export interface movieOrSeriesType extends moviesGeneral {
+export interface MovieOrSeriesType extends MoviesGeneral {
   genres: [{ id: number, name: string }],
-  credits: castCrewType,
+  credits: CastCrewType,
+}
+
+export interface Genres {
+  id: number,
+  name: string
 }
