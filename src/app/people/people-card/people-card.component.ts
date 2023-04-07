@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {castType} from "../types/cast-type";
-import {crewType} from "../types/crew-type";
-import {searchType} from "../../types/search-type";
+import {CastType} from "../types/cast-type";
+import {CrewType} from "../types/crew-type";
+import {SearchType} from "../../types/search-type";
 
 @Component({
   selector: 'app-people-card',
@@ -9,7 +9,7 @@ import {searchType} from "../../types/search-type";
   styleUrls: ['./people-card.component.scss']
 })
 export class PeopleCardComponent {
-  @Input("actor") public actor!: castType | searchType;
-  @Input("crew") public crew!: crewType | searchType;
+  @Input("actor") public actor!: CastType | SearchType;
+  @Input("crew") public crew!: CrewType | SearchType;
   @Input("search") public search?: boolean;
 }

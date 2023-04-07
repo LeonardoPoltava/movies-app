@@ -1,4 +1,4 @@
-export interface searchType {
+export interface SearchType {
   backdrop_path: string,
   first_air_date?: string,
   release_date?: string,

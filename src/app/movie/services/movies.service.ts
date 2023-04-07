@@ -1,8 +1,8 @@
-import {HttpClient,} from '@angular/common/http';
+import {HttpClient, HttpParams,} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {Genres, movieOrSeriesType, MoviesType} from "../types/movies-type";
+import {Genres, MovieOrSeriesType, MoviesType} from "../types/movies-type";
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,8 @@ export class MoviesService {
     );
   }
 
-  public requestMovie(type: string, movieId: string): Observable<movieOrSeriesType> {
-    return this.http.get<movieOrSeriesType>(`/${type}/${movieId}?append_to_response=credits`).pipe(
+  public requestMovie(type: string, movieId: string): Observable<MovieOrSeriesType> {
+    return this.http.get<MovieOrSeriesType>(`/${type}/${movieId}?append_to_response=credits`).pipe(
       map(
         response => response
       )
@@ -43,8 +43,14 @@ export class MoviesService {
     );
   }
 
-  public requestDiscoverMovie(queryParams: string): Observable<MoviesType[]> {
-    return this.http.get<any>(`/discover/movie?${queryParams}`).pipe(
+  public requestDiscoverMovie(genres: number[], lte: number, gte: number, page:number): Observable<MoviesType[]> {
+    let params = new HttpParams()
+      .set('with_genres', genres.join(","))
+      .set('release_date.gte', gte)
+      .set('release_date.lte', lte)
+      .set('page', page)
+    ;
+    return this.http.get<any>(`/discover/movie`, { params: params }).pipe(
       map(
         response => response.results
       )

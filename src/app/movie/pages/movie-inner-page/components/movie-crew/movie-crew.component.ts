@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {crewType} from "../../../../../people/types/crew-type";
+import {CrewType} from "../../../../../people/types/crew-type";
 
 @Component({
   selector: 'app-movie-crew',
@@ -7,5 +7,5 @@ import {crewType} from "../../../../../people/types/crew-type";
   styleUrls: ['./movie-crew.component.scss']
 })
 export class MovieCrewComponent {
-  @Input() public castCrew!: crewType[];
+  @Input() public castCrew!: CrewType[];
 }

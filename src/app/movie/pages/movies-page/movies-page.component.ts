@@ -1,7 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable, Subject, switchMap} from "rxjs";
+import {BehaviorSubject, Observable, Subject, switchMap} from "rxjs";
 import {Genres, MoviesType} from "../../types/movies-type";
 import {MoviesService} from "../../services/movies.service";
+import {FormControl, FormGroup} from "@angular/forms";
+
+interface FilterGroupType {
+  genres: number[],
+  page: number
+}
 
 @Component({
   selector: 'app-movies-page',
@@ -11,54 +17,71 @@ import {MoviesService} from "../../services/movies.service";
 export class MoviesPageComponent implements OnInit {
   public defaultPage = 1;
   public allMovies: MoviesType[] = [];
-  public filteredMovies: MoviesType[] = [];
   public isLoading = false;
-  private moviesSubject = new Subject<number>();
-  private moviesFilteredSubject = new Subject<string>();
+  private moviesSubject = new BehaviorSubject<number>(this.defaultPage);
+  private moviesFilteredSubject = new Subject<FilterGroupType>();
   public genres$: Observable<Genres[]> = this.moviesService.requestGenres();
-  private queryParam = "";
-  public filteredArray: any = [];
-  private activeFilters: string[] = []
+  public selectedGenres: number[] = [];
+  public filterForm!: FormGroup;
+  public filtered = false;
+  public filteredGroup:FilterGroupType = {
+    genres: this.selectedGenres,
+    page: 1
+  }
 
   constructor(private readonly moviesService: MoviesService) {}
 
-  public loadMoreMovies() {
+  public loadMoreMovies(): void {
     this.isLoading = true;
-    this.moviesSubject.next(++this.defaultPage);
+    if(!this.filtered) {
+      this.moviesSubject.next(++this.defaultPage);
+    }
+    else {
+      this.moviesFilteredSubject.next({genres: this.filteredGroup.genres, page: ++this.filteredGroup.page});
+    }
   }
 
-  public makeQueryParams(id: number) {
-    if(this.filteredArray.includes(id)) {
-      const index = this.filteredArray.indexOf(id);
+  public toggleGenre(id: number): void {
+    if(this.selectedGenres.includes(id)) {
+      const index = this.selectedGenres.indexOf(id);
       if (index > -1) {
-        this.filteredArray.splice(index, 1);
-      }
-      if(this.filteredArray.length === 0) {
-        const index = this.activeFilters.indexOf("Genre");
-        this.activeFilters.splice(index, 1);
+        this.selectedGenres.splice(index, 1);
+        if(this.selectedGenres.length < 1) {
+          this.clearFilters();
+        }
       }
     }
     else {
-      this.filteredArray.push(id);
-      this.queryParam += id;
-      if(!this.activeFilters.includes("Genre")) {
-        this.activeFilters.push("Genre");
-      }
+      this.selectedGenres.push(id);
     }
   }
 
-  public loadFilteredMovies() {
+  public loadFilteredMovies(): void {
+    const lte = this.filterForm.value.release_lte;
+    const gte = this.filterForm.value.release_gte;
     this.allMovies = [];
     this.isLoading = true;
+    this.filtered = true;
     this.moviesFilteredSubject.pipe(
-      switchMap((params: string) => this.moviesService.requestDiscoverMovie(params)),
+      switchMap((params: FilterGroupType) => this.moviesService.requestDiscoverMovie(this.filteredGroup.genres, lte, gte, this.filteredGroup.page)),
     ).subscribe({
       next: (movies: MoviesType[]) => {
         this.allMovies = [...this.allMovies, ...movies];
         this.isLoading = false;
       }
     })
-    this.moviesFilteredSubject.next(this.queryParam);
+    this.moviesFilteredSubject.next({genres: this.filteredGroup.genres, page: this.filteredGroup.page});
+  }
+
+  public clearFilters(): void {
+    this.selectedGenres = [];
+    this.filteredGroup.genres = [];
+    this.filteredGroup.page = 1;
+    this.filterForm.controls['release_gte'].setValue("");
+    this.filterForm.controls['release_lte'].setValue("");
+    this.allMovies = [];
+    this.defaultPage = 1;
+    this.moviesSubject.next(this.defaultPage);
   }
 
   public ngOnInit(): void {
@@ -70,6 +93,9 @@ export class MoviesPageComponent implements OnInit {
         this.isLoading = false;
       }
     })
-    this.moviesSubject.next(this.defaultPage);
+    this.filterForm = new FormGroup({
+      release_gte: new FormControl(''),
+      release_lte: new FormControl(''),
+    });
   }
 }

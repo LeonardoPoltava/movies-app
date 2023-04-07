@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {personParticipate} from "../../../types/cast-crew-type";
+import {PersonParticipate} from "../../../types/cast-crew-type";
 
 @Component({
   selector: 'app-person-participate',
@@ -8,5 +8,5 @@ import {personParticipate} from "../../../types/cast-crew-type";
 })
 export class PersonParticipateComponent {
   @Input("title") public title?: string;
-  @Input("personParticipate") public personParticipate?: personParticipate[];
+  @Input("personParticipate") public personParticipate?: PersonParticipate[];
 }
