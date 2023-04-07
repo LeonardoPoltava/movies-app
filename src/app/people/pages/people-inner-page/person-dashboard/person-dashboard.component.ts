@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {personType} from "../../../types/cast-crew-type";
+import {PersonType} from "../../../types/cast-crew-type";
 
 @Component({
   selector: 'app-person-dashboard',
@@ -7,5 +7,5 @@ import {personType} from "../../../types/cast-crew-type";
   styleUrls: ['./person-dashboard.component.scss']
 })
 export class PersonDashboardComponent {
-  @Input() public person!: personType;
+  @Input() public person!: PersonType;
 }
