@@ -21,11 +21,10 @@ export class MoviesPageComponent implements OnInit {
   private moviesSubject = new BehaviorSubject<number>(this.defaultPage);
   private moviesFilteredSubject = new Subject<FilterGroupType>();
   public genres$: Observable<Genres[]> = this.moviesService.requestGenres();
-  public selectedGenres: number[] = [];
   public filterForm!: FormGroup;
   public filtered = false;
   public filteredGroup:FilterGroupType = {
-    genres: this.selectedGenres,
+    genres: [],
     page: 1
   }
 
@@ -42,17 +41,18 @@ export class MoviesPageComponent implements OnInit {
   }
 
   public toggleGenre(id: number): void {
-    if(this.selectedGenres.includes(id)) {
-      const index = this.selectedGenres.indexOf(id);
+    if(this.filteredGroup.genres.includes(id)) {
+      const index = this.filteredGroup.genres.indexOf(id);
       if (index > -1) {
-        this.selectedGenres.splice(index, 1);
-        if(this.selectedGenres.length < 1) {
+        this.filteredGroup.genres.splice(index, 1);
+        if(this.filteredGroup.genres.length < 1) {
           this.clearFilters();
         }
       }
     }
     else {
-      this.selectedGenres.push(id);
+      this.filteredGroup.genres.push(id);
+      console.log(this.filteredGroup.genres);
     }
   }
 
@@ -63,18 +63,18 @@ export class MoviesPageComponent implements OnInit {
     this.isLoading = true;
     this.filtered = true;
     this.moviesFilteredSubject.pipe(
-      switchMap((params: FilterGroupType) => this.moviesService.requestDiscoverMovie(this.filteredGroup.genres, lte, gte, this.filteredGroup.page)),
+      switchMap((params: FilterGroupType) => this.moviesService.requestDiscoverMovie(params.genres, lte, gte, params.page)),
     ).subscribe({
       next: (movies: MoviesType[]) => {
         this.allMovies = [...this.allMovies, ...movies];
         this.isLoading = false;
       }
     })
+    console.log(this.filteredGroup.genres);
     this.moviesFilteredSubject.next({genres: this.filteredGroup.genres, page: this.filteredGroup.page});
   }
 
   public clearFilters(): void {
-    this.selectedGenres = [];
     this.filteredGroup.genres = [];
     this.filteredGroup.page = 1;
     this.filterForm.controls['release_gte'].setValue("");
