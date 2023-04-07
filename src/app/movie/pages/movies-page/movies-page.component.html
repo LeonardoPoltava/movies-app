@@ -15,20 +15,20 @@
               (click)="toggleGenre(genre.id)"
               data-id="{{genre.id}}"
               class="movies-filter__btn"
-              [class.movies-filter__btn--active]="selectedGenres.includes(genre.id)"
+              [class.movies-filter__btn--active]="filteredGroup.genres.includes(genre.id)"
               *ngFor="let genre of genres$ | async; trackBy: 'id' | trackBy"
       >{{genre.name}}</button>
     </div>
     <button (click)="clearFilters()"
             [disabled]="
-              selectedGenres.length < 1 &&
+              filteredGroup.genres.length < 1 &&
               filterForm.controls['release_gte'].value.length < 1 &&
               filterForm.controls['release_lte'].value.length < 1
             "
             type="button" class="movies-filter__clear">Clear filters</button>
     <button
       [disabled]="
-        selectedGenres.length < 1 &&
+        filteredGroup.genres.length < 1 &&
         filterForm.controls['release_gte'].value.length < 1 &&
         filterForm.controls['release_lte'].value.length < 1
       "
