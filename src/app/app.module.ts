@@ -9,6 +9,7 @@ import {EntrancePageModule} from "./movie/pages/entrance-page/entrance-page.modu
 import {MovieInnerPageModule} from "./movie/pages/movie-inner-page/movie-inner-page.module";
 import {UrlInterceptor} from "./http/url.interceptor";
 import {PeopleInnerPageModule} from "./people/pages/people-inner-page/people-inner-page.module";
+import {MoviesPageModule} from "./movie/pages/movies-page/movies-page.module";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {PeopleInnerPageModule} from "./people/pages/people-inner-page/people-inn
     EntrancePageModule,
     MovieInnerPageModule,
     PeopleInnerPageModule,
+    MoviesPageModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

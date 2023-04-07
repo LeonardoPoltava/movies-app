@@ -6,6 +6,11 @@
   outline: none;
 }
 
+button {
+  cursor: pointer;
+  border: none;
+}
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
@@ -28,6 +33,7 @@ body {
   line-height: 1.2;
   background: #032541FF;
   color: #fff;
+  overflow-x: hidden;
 }
 
 // preloader

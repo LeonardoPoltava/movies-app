@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../../../../services/search.service";
 import {debounceTime, Observable, switchMap} from "rxjs";
 import {FormControl, FormGroup} from "@angular/forms";
-import {searchType} from "../../../../../types/search-type";
+import {SearchType} from "../../../../../types/search-type";
 
 @Component({
   selector: 'app-search',
@@ -10,7 +10,7 @@ import {searchType} from "../../../../../types/search-type";
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  public search$?: Observable<searchType[]>;
+  public search$?: Observable<SearchType[]>;
   public searchForm!: FormGroup;
 
   constructor(private readonly searchService: SearchService) {

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {combineLatest, Observable, switchMap} from 'rxjs';
 import {MoviesService} from "../../services/movies.service";
-import {movieOrSeriesType} from "../../types/movies-type";
+import {MovieOrSeriesType} from "../../types/movies-type";
 
 @Component({
   selector: 'app-movie-inner-page',
@@ -11,7 +11,7 @@ import {movieOrSeriesType} from "../../types/movies-type";
 })
 export class MovieInnerPageComponent implements OnInit {
 
-  public movie$!: Observable<movieOrSeriesType>;
+  public movie$!: Observable<MovieOrSeriesType>;
 
   constructor(private moviesService: MoviesService,
               private readonly route: ActivatedRoute

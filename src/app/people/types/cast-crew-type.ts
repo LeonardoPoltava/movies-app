@@ -1,12 +1,12 @@
-import {castType} from "./cast-type";
-import {crewType} from "./crew-type";
+import {CastType} from "./cast-type";
+import {CrewType} from "./crew-type";
 
-export interface castCrewType {
-  cast: castType[],
-  crew: crewType[]
+export interface CastCrewType {
+  cast: CastType[],
+  crew: CrewType[]
 }
 
-interface personGeneral {
+interface PersonGeneral {
   adult: false
   backdrop_path: string
   credit_id: string,
@@ -26,19 +26,19 @@ interface personGeneral {
   first_air_date: string,
 }
 
-export interface personCrew extends personGeneral {
+export interface PersonCrew extends PersonGeneral {
   department?: string;
   job?: string;
 }
 
-export interface personCast extends personGeneral {
+export interface PersonCast extends PersonGeneral {
   character?: string,
   order?: number,
 }
 
-export type personParticipate = personCrew & personCast;
+export type PersonParticipate = PersonCrew & PersonCast;
 
-export type personType = {
+export type PersonType = {
   adult: boolean,
   also_known_as: string[],
   biography: string,
@@ -54,7 +54,7 @@ export type personType = {
   popularity: number,
   profile_path: string,
   movie_credits: {
-    cast: personCast[]
-    crew: personCrew[]
+    cast: PersonCast[]
+    crew: PersonCrew[]
   }
 }

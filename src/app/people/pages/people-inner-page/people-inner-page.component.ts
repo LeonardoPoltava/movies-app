@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PeopleService} from "../../services/people.service";
 import {Observable, switchMap} from "rxjs";
 import {ActivatedRoute, Params} from "@angular/router";
-import {personType} from "../../types/cast-crew-type";
+import {PersonType} from "../../types/cast-crew-type";
 
 @Component({
   selector: 'app-people-inner-page',
@@ -10,7 +10,7 @@ import {personType} from "../../types/cast-crew-type";
   styleUrls: ['./people-inner-page.component.scss']
 })
 export class PeopleInnerPageComponent implements OnInit {
-  public person$!: Observable<personType>;
+  public person$!: Observable<PersonType>;
 
   constructor(
     private readonly peopleService: PeopleService,

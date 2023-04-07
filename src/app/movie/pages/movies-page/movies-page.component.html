@@ -1,0 +1,58 @@
+<div class="container movies-page">
+  <form class="movies-filter" [formGroup]="filterForm">
+    <span class="movies-filter__title">Filter</span>
+    <div class="movies-filter__section">
+      <span class="movies-filter__title">Release Dates </span>
+      <label class="movies-filter__label" for="from">From</label>
+      <input id="from" type="date" formControlName="release_gte" class="movies-filter__date">
+      <label class="movies-filter__label" for="to">To</label>
+      <input id="to" type="date" formControlName="release_lte" class="movies-filter__date">
+    </div>
+
+    <div class="movies-filter__section">
+      <span class="movies-filter__title">Filter by genres</span>
+      <button type="button"
+              (click)="toggleGenre(genre.id)"
+              data-id="{{genre.id}}"
+              class="movies-filter__btn"
+              [class.movies-filter__btn--active]="selectedGenres.includes(genre.id)"
+              *ngFor="let genre of genres$ | async; trackBy: 'id' | trackBy"
+      >{{genre.name}}</button>
+    </div>
+    <button (click)="clearFilters()"
+            [disabled]="
+              selectedGenres.length < 1 &&
+              filterForm.controls['release_gte'].value.length < 1 &&
+              filterForm.controls['release_lte'].value.length < 1
+            "
+            type="button" class="movies-filter__clear">Clear filters</button>
+    <button
+      [disabled]="
+        selectedGenres.length < 1 &&
+        filterForm.controls['release_gte'].value.length < 1 &&
+        filterForm.controls['release_lte'].value.length < 1
+      "
+      (click)="loadFilteredMovies()"
+      type="button"
+      class="movies-filter__submit"
+    >Apply filters</button>
+  </form>
+  <div class="movies-content">
+    <h1>Popular movies</h1>
+    <div class="movies-content__list">
+      <ng-container *ngFor="let movie of allMovies; trackBy: 'id' | trackBy">
+        <app-movie-card
+          [movieType]="movie.title ? 'movie' : 'tv'"
+          [imgSrc]="movie.poster_path ? (movie.poster_path | imageUrl) : (movie.backdrop_path | imageUrl)"
+          [movieName]="movie.name ? movie.name : movie.title || ''"
+          [date]="movie.first_air_date ? movie.first_air_date : movie.release_date || ''"
+          [movieId]="movie.id"
+        ></app-movie-card>
+      </ng-container>
+    </div>
+
+    <div *ngIf="isLoading" class="lds-dual-ring"></div>
+    <button (click)="loadMoreMovies()" class="movies-content__btn" type="button">Load more</button>
+  </div>
+
+</div>

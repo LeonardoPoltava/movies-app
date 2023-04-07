@@ -1,4 +1,4 @@
-export interface crewType {
+export interface CrewType {
   adult: boolean,
   gender: number,
   id: number,
