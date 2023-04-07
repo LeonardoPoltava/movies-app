@@ -1,11 +1,6 @@
 <div class="container _inner" *ngIf="person$ | async as person">
   <app-person-dashboard
-    [personImg]="person.profile_path"
-    [personName]="person.name"
-    [personBirthday]="person.birthday"
-    [personPlace]="person.place_of_birth"
-    [personDepartment]="person.known_for_department"
-    [personBiography]="person.biography"
+    [person]="person"
   ></app-person-dashboard>
   <app-person-participate *ngIf="person.movie_credits.cast.length" [personParticipate]="person.movie_credits.cast" [title]="'Acting'"></app-person-participate>
   <app-person-participate *ngIf="person.movie_credits.crew.length" [personParticipate]="person.movie_credits.crew" [title]="'Production'"></app-person-participate>

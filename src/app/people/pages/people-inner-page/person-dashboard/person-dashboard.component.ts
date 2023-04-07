@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {PersonType} from "../../../types/cast-crew-type";
 
 @Component({
   selector: 'app-person-dashboard',
@@ -6,10 +7,5 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./person-dashboard.component.scss']
 })
 export class PersonDashboardComponent {
-  @Input("personImg") public personImg?: string;
-  @Input("personName") public personName?: string;
-  @Input("personBirthday") public personBirthday?: string;
-  @Input("personPlace") public personPlace?: string;
-  @Input("personDepartment") public personDepartment?: string;
-  @Input("personBiography") public personBiography?: string;
+  @Input() public person!: PersonType;
 }

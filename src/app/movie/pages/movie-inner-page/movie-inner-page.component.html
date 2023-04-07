@@ -1,5 +1,22 @@
 <div class="container _inner" *ngIf="movie$ | async as movie">
-    <app-movie-dashboard [movie]="movie"></app-movie-dashboard>
-    <app-movie-actors *ngIf="movie.credits.cast.length > 0" [castActors]="movie.credits.cast"></app-movie-actors>
-    <app-movie-crew *ngIf="movie.credits.crew.length > 0" [castCrew]="movie.credits.crew"></app-movie-crew>
+  <app-movie-dashboard [movie]="movie"></app-movie-dashboard>
+
+  <app-movie-cast-layout castTitle="Actors" *ngIf="movie.credits.cast.length > 0">
+    <app-people-card  *ngFor="let actor of movie.credits.cast; trackBy: 'id' | trackBy" [person]="actor">
+        <span class="cast-person__name"><b>Actor name:</b> {{actor.name}}</span>
+        <span class="cast-person__character">
+           <b>Character:</b> {{actor.character}}
+       </span>
+    </app-people-card>
+  </app-movie-cast-layout>
+
+  <app-movie-cast-layout castTitle="Crew" *ngIf="movie.credits.crew.length > 0">
+    <ng-container *ngFor="let crew of movie.credits.crew; trackBy: 'id' | trackBy">
+      <app-people-card [person]="crew">
+        <span class="cast-person__name"><b>Crew name:</b> {{crew.name}}</span>
+        <span class="cast-person__job"><b>Department:</b> {{crew.department}}</span>
+        <span class="cast-person__job"><b>{{crew.job}}</b></span>
+      </app-people-card>
+    </ng-container>
+  </app-movie-cast-layout>
 </div>

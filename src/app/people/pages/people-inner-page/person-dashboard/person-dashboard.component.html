@@ -1,13 +1,15 @@
 <div class="person-dashboard">
-  <img [src]="personImg ? (personImg | imageUrl) : './assets/user-icon.svg'
+  <img [src]="person.profile_path ? (person.profile_path | imageUrl) : './assets/user-icon.svg'
 "
-       [class._no-photo]="!personImg"
+       [class._no-photo]="!person.profile_path"
        class="person-dashboard__photo"
-       alt="{{personName}} photo"
+       alt="{{person.name}} photo"
   >
-  <span class="person-dashboard__text person-dashboard__text--name">{{personName}}</span>
-  <span class="person-dashboard__text person-dashboard__text--birthday"><b>Date of birth:</b> {{personBirthday}}</span>
-  <span class="person-dashboard__text person-dashboard__text--place"><b>Place of birth:</b> {{personPlace}}</span>
-  <span class="person-dashboard__text person-dashboard__text--department"><b>Department:</b> {{personDepartment}}</span>
-  <span class="person-dashboard__text person-dashboard__text--biography">{{personBiography}}</span>
+  <div class="person-dashboard__content">
+    <span class="person-dashboard__text person-dashboard__text--name">{{person.name}}</span>
+    <span class="person-dashboard__text person-dashboard__text--birthday" *ngIf="person.birthday"><b>Date of birth:</b> {{person.birthday}}</span>
+    <span class="person-dashboard__text person-dashboard__text--place" *ngIf="person.place_of_birth"><b>Place of birth:</b> {{person.place_of_birth}}</span>
+    <span class="person-dashboard__text person-dashboard__text--department" *ngIf="person.known_for_department"><b>Department:</b> {{person.known_for_department}}</span>
+    <span class="person-dashboard__text person-dashboard__text--biography" *ngIf="person.biography">{{person.biography}}</span>
+  </div>
 </div>

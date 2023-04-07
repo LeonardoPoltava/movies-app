@@ -1,4 +1,5 @@
 @import "src/styles/mixins";
+@import "src/styles/variables";
 
 .search {
   padding: 50px 0;
@@ -31,6 +32,11 @@
   }
   &__results {
     margin-top: 15px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    box-shadow: 0 0 50px 15px #fff;
   }
   &__results-content {
     background: #032541FF;
@@ -73,6 +79,14 @@
     }
     .movie__date {
       font-size: 14px;
+    }
+    .cast-person {
+      max-width: unset;
+      width: 100%;
+    }
+    .cast-person__photo {
+      width: 100%;
+      height: auto;
     }
   }
 }
