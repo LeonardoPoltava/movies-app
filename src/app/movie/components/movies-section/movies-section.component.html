@@ -9,6 +9,7 @@
             [imgSrc]="movie.poster_path ? (movie.poster_path | imageUrl) : (movie.backdrop_path | imageUrl)"
             [movieName]="movie.name ? movie.name : movie.title || ''"
             [date]="movie.first_air_date ? movie.first_air_date : movie.release_date || ''"
+            [rate]="movie.vote_average"
             [movieId]="movie.id"
           ></app-movie-card>
         </ng-container>

@@ -11,10 +11,11 @@
   background: #fff;
   color: #000;
   height: 100%;
+  position: relative;
   &__img {
     display: block;
-    height: auto;
     width: 100%;
+    object-fit: cover;
   }
   &__text {
     display: block;
@@ -24,11 +25,36 @@
   &__name {
     font-size: 18px;
     font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
     @include bp768 {
       font-size: 24px;
     }
   }
   &__date {
     font-style: italic;
+  }
+  &__rate {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: orange;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-weight: bold;
+    &.top {
+      background-color: green;
+      box-shadow: 1px 1px 10px #fff;
+      color: #fff;
+    }
+    &.low {
+      background-color: red;
+      color: #fff;
+    }
   }
 }

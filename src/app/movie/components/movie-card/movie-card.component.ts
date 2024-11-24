@@ -12,8 +12,10 @@ export class MovieCardComponent {
   @Input("imgSrc") public imgSrc?: string | null;
   @Input("movieName") public name!: string;
   @Input("date") public date!: string;
+  @Input("rate") public rate!: number;
   @Input("movieType") public movieType!: string;
   @Input("movieJob") public movieJob?: string;
   @Input("movieCharacter") public movieCharacter?: string;
   @Input("movieId") public movieId!: number;
+
 }

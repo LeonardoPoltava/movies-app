@@ -18,6 +18,11 @@
     display: block;
     width: 100%;
   }
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   &__side {
     display: grid;
     grid-auto-rows: max-content;
@@ -25,5 +30,21 @@
   }
   &__title {
     font-size: 20px;
+  }
+  &__rate {
+    display: block;
+    border-radius: 100%;
+    background-color: orange;
+    padding: 10px;
+    font-weight: bold;
+    &.top {
+      background-color: green;
+      box-shadow: 1px 1px 10px #fff;
+      color: #fff;
+    }
+    &.low {
+      background-color: red;
+      color: #fff;
+    }
   }
 }

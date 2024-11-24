@@ -18,4 +18,5 @@ export interface SearchType {
   department: string,
   job: string,
   known_for_department: string,
+  vote_average: number,
 }

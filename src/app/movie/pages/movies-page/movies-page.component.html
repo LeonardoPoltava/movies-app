@@ -47,6 +47,7 @@
           [movieName]="movie.name ? movie.name : movie.title || ''"
           [date]="movie.first_air_date ? movie.first_air_date : movie.release_date || ''"
           [movieId]="movie.id"
+          [rate]="movie.vote_average"
         ></app-movie-card>
       </ng-container>
     </div>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable, Subject, switchMap} from "rxjs";
 import {Genres, MoviesType} from "../../types/movies-type";
 import {MoviesService} from "../../services/movies.service";
@@ -6,6 +6,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 
 interface FilterGroupType {
   genres: number[],
+  lte: number,
+  gte: number,
   page: number
 }
 
@@ -14,7 +16,7 @@ interface FilterGroupType {
   templateUrl: './movies-page.component.html',
   styleUrls: ['./movies-page.component.scss']
 })
-export class MoviesPageComponent implements OnInit {
+export class MoviesPageComponent implements OnInit, OnDestroy {
   public defaultPage = 1;
   public allMovies: MoviesType[] = [];
   public isLoading = false;
@@ -25,6 +27,8 @@ export class MoviesPageComponent implements OnInit {
   public filtered = false;
   public filteredGroup:FilterGroupType = {
     genres: [],
+    lte: 0,
+    gte: 0,
     page: 1
   }
 
@@ -36,7 +40,9 @@ export class MoviesPageComponent implements OnInit {
       this.moviesSubject.next(++this.defaultPage);
     }
     else {
-      this.moviesFilteredSubject.next({genres: this.filteredGroup.genres, page: ++this.filteredGroup.page});
+      const lte = this.filterForm.value.release_lte;
+      const gte = this.filterForm.value.release_gte;
+      this.moviesFilteredSubject.next({genres: this.filteredGroup.genres,lte: lte, gte: gte, page: ++this.filteredGroup.page});
     }
   }
 
@@ -52,25 +58,19 @@ export class MoviesPageComponent implements OnInit {
     }
     else {
       this.filteredGroup.genres.push(id);
-      console.log(this.filteredGroup.genres);
     }
   }
 
   public loadFilteredMovies(): void {
+
     const lte = this.filterForm.value.release_lte;
     const gte = this.filterForm.value.release_gte;
+
     this.allMovies = [];
     this.isLoading = true;
     this.filtered = true;
-    this.moviesFilteredSubject.pipe(
-      switchMap((params: FilterGroupType) => this.moviesService.requestDiscoverMovie(params.genres, lte, gte, params.page)),
-    ).subscribe({
-      next: (movies: MoviesType[]) => {
-        this.allMovies = [...this.allMovies, ...movies];
-        this.isLoading = false;
-      }
-    })
-    this.moviesFilteredSubject.next({genres: this.filteredGroup.genres, page: this.filteredGroup.page});
+    this.moviesFilteredSubject.next({genres: this.filteredGroup.genres, lte: lte, gte: gte, page: this.filteredGroup.page});
+
   }
 
   public clearFilters(): void {
@@ -91,10 +91,24 @@ export class MoviesPageComponent implements OnInit {
         this.allMovies = [...this.allMovies, ...movies];
         this.isLoading = false;
       }
-    })
+    });
+
     this.filterForm = new FormGroup({
       release_gte: new FormControl(''),
       release_lte: new FormControl(''),
     });
+
+    this.moviesFilteredSubject.pipe(
+      switchMap((params: FilterGroupType) => this.moviesService.requestDiscoverMovie(params.genres, params.lte, params.gte, params.page)),
+    ).subscribe({
+      next: (movies: MoviesType[]) => {
+        this.allMovies = [...this.allMovies, ...movies];
+        this.isLoading = false;
+      }
+    });
+  }
+
+  public ngOnDestroy(){
+    this.moviesFilteredSubject.unsubscribe();
   }
 }

@@ -8,6 +8,11 @@
   >
   <span class="movie__text movie__name">{{name}}</span>
   <span class="movie__text movie__date">{{date}}</span>
+  <span class="movie__text movie__rate" *ngIf="rate" [ngClass]="{
+  'top': rate > 8,
+  'low': rate < 6
+  }
+">{{rate | fixed: 1}}</span>
   <span class="movie__text movie__job" *ngIf="movieJob"><b>Job:</b> {{movieJob}}</span>
   <span class="movie__text movie__job" *ngIf="movieCharacter"><b>Character:</b> {{movieCharacter}}</span>
 </a>

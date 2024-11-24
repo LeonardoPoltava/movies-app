@@ -26,6 +26,7 @@
                 [movieName]="searchItem.name ? searchItem.name : searchItem.title || ''"
                 [date]="searchItem.first_air_date ? searchItem.first_air_date : searchItem.release_date || ''"
                 [movieId]="searchItem.id"
+                [rate]="searchItem.vote_average"
               ></app-movie-card>
             </ng-container>
           </ng-container>
