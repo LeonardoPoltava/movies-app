@@ -4,11 +4,13 @@
       <a
         routerLink="/"
         routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
         class="header__link"
       >Main page</a>
       <a
         routerLink="/movies"
         routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
         class="header__link"
       >Movies</a>
     </nav>

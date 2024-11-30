@@ -9,6 +9,8 @@ interface FilterGroupType {
   lte: number,
   gte: number,
   page: number
+  voteLte: number,
+  voteGte: number,
 }
 
 @Component({
@@ -20,43 +22,53 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
   public defaultPage = 1;
   public allMovies: MoviesType[] = [];
   public isLoading = false;
-  private moviesSubject = new BehaviorSubject<number>(this.defaultPage);
-  private moviesFilteredSubject = new Subject<FilterGroupType>();
   public genres$: Observable<Genres[]> = this.moviesService.requestGenres();
   public filterForm!: FormGroup;
   public filtered = false;
-  public filteredGroup:FilterGroupType = {
+  public filteredGroup: FilterGroupType = {
     genres: [],
     lte: 0,
     gte: 0,
+    voteLte: 0,
+    voteGte: 0,
     page: 1
   }
+  private moviesSubject = new BehaviorSubject<number>(this.defaultPage);
+  private moviesFilteredSubject = new Subject<FilterGroupType>();
 
-  constructor(private readonly moviesService: MoviesService) {}
+  constructor(private readonly moviesService: MoviesService) {
+  }
 
   public loadMoreMovies(): void {
     this.isLoading = true;
-    if(!this.filtered) {
+    if (!this.filtered) {
       this.moviesSubject.next(++this.defaultPage);
-    }
-    else {
+    } else {
       const lte = this.filterForm.value.release_lte;
       const gte = this.filterForm.value.release_gte;
-      this.moviesFilteredSubject.next({genres: this.filteredGroup.genres,lte: lte, gte: gte, page: ++this.filteredGroup.page});
+      const voteLte = this.filterForm.value.release_lte;
+      const voteGte = this.filterForm.value.release_gte;
+      this.moviesFilteredSubject.next({
+        genres: this.filteredGroup.genres,
+        lte: lte,
+        gte: gte,
+        voteGte: voteGte,
+        voteLte: voteLte,
+        page: ++this.filteredGroup.page
+      });
     }
   }
 
   public toggleGenre(id: number): void {
-    if(this.filteredGroup.genres.includes(id)) {
+    if (this.filteredGroup.genres.includes(id)) {
       const index = this.filteredGroup.genres.indexOf(id);
       if (index > -1) {
         this.filteredGroup.genres.splice(index, 1);
-        if(this.filteredGroup.genres.length < 1) {
+        if (this.filteredGroup.genres.length < 1) {
           this.clearFilters();
         }
       }
-    }
-    else {
+    } else {
       this.filteredGroup.genres.push(id);
     }
   }
@@ -65,11 +77,20 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
 
     const lte = this.filterForm.value.release_lte;
     const gte = this.filterForm.value.release_gte;
+    const voteLte = this.filterForm.value.vote_lte;
+    const voteGte = this.filterForm.value.vote_gte;
 
     this.allMovies = [];
     this.isLoading = true;
     this.filtered = true;
-    this.moviesFilteredSubject.next({genres: this.filteredGroup.genres, lte: lte, gte: gte, page: this.filteredGroup.page});
+    this.moviesFilteredSubject.next({
+      genres: this.filteredGroup.genres,
+      lte: lte,
+      gte: gte,
+      voteLte: voteLte,
+      voteGte: voteGte,
+      page: this.filteredGroup.page
+    });
 
   }
 
@@ -78,6 +99,8 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
     this.filteredGroup.page = 1;
     this.filterForm.controls['release_gte'].setValue("");
     this.filterForm.controls['release_lte'].setValue("");
+    this.filterForm.controls['vote_gte'].setValue("");
+    this.filterForm.controls['vote_lte'].setValue("");
     this.allMovies = [];
     this.defaultPage = 1;
     this.moviesSubject.next(this.defaultPage);
@@ -96,10 +119,12 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
     this.filterForm = new FormGroup({
       release_gte: new FormControl(''),
       release_lte: new FormControl(''),
+      vote_gte: new FormControl(''),
+      vote_lte: new FormControl(''),
     });
 
     this.moviesFilteredSubject.pipe(
-      switchMap((params: FilterGroupType) => this.moviesService.requestDiscoverMovie(params.genres, params.lte, params.gte, params.page)),
+      switchMap((params: FilterGroupType) => this.moviesService.requestDiscoverMovie(params.genres,params.voteLte, params.voteGte, params.lte, params.gte, params.page)),
     ).subscribe({
       next: (movies: MoviesType[]) => {
         this.allMovies = [...this.allMovies, ...movies];
@@ -108,7 +133,7 @@ export class MoviesPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  public ngOnDestroy(){
+  public ngOnDestroy() {
     this.moviesFilteredSubject.unsubscribe();
   }
 }
