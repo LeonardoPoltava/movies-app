@@ -8,7 +8,13 @@
       <label class="movies-filter__label" for="to">To</label>
       <input id="to" type="date" formControlName="release_lte" class="movies-filter__date">
     </div>
-
+    <div class="movies-filter__section">
+      <span class="movies-filter__title">Filter by rating </span>
+      <label class="movies-filter__label" for="from">From</label>
+      <input id="rateFrom" type="number" formControlName="vote_gte" class="movies-filter__date">
+      <label class="movies-filter__label" for="to">To</label>
+      <input id="rateTo" type="number" formControlName="vote_lte" class="movies-filter__date">
+    </div>
     <div class="movies-filter__section">
       <span class="movies-filter__title">Filter by genres</span>
       <button type="button"
@@ -30,7 +36,9 @@
       [disabled]="
         filteredGroup.genres.length < 1 &&
         filterForm.controls['release_gte'].value.length < 1 &&
-        filterForm.controls['release_lte'].value.length < 1
+        filterForm.controls['release_lte'].value.length < 1&&
+        filterForm.controls['vote_gte'].value.length < 1 &&
+        filterForm.controls['vote_lte'].value.length < 1
       "
       (click)="loadFilteredMovies()"
       type="button"

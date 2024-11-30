@@ -4,7 +4,7 @@
         <div class="movie-dashboard__head">
           <span class="movie-dashboard__title"><b>Title:</b> {{movie.name ? movie.name : movie.title}}</span>
           <span class="movie-dashboard__rate" *ngIf="movie.vote_average" [ngClass]="{
-          'top': movie.vote_average > 8,
+          'top': movie.vote_average >= 8,
           'low': movie.vote_average < 6
           }
         ">{{movie.vote_average | fixed: 1}}</span>

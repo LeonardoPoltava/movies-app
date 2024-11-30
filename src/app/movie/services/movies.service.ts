@@ -43,9 +43,11 @@ export class MoviesService {
     );
   }
 
-  public requestDiscoverMovie(genres: number[], lte: number, gte: number, page:number): Observable<MoviesType[]> {
+  public requestDiscoverMovie(genres: number[],voteLte: number, voteGte: number, lte: number, gte: number, page:number): Observable<MoviesType[]> {
     let params = new HttpParams()
       .set('with_genres', genres.join(","))
+      .set('vote_average.gte', voteGte)
+      .set('vote_average.lte', voteLte)
       .set('release_date.gte', gte)
       .set('release_date.lte', lte)
       .set('page', page)
