@@ -1,6 +1,6 @@
 <div class="movies-section">
   <div class="container">
-    <h1>{{moviesTitle}} !!!</h1>
+    <h1>{{moviesTitle}} !!!!</h1>
     <div class="movies-section__list">
       <ng-container *ngIf="elements?.length; else preloader">
         <ng-container *ngFor="let movie of elements | slice: 0: 12; trackBy: 'id' | trackBy">
